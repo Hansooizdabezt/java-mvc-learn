@@ -13,6 +13,7 @@ import vn.hoidanit.laptopshop.domain.Cart;
 import vn.hoidanit.laptopshop.domain.CartDetail;
 import vn.hoidanit.laptopshop.domain.Product;
 import vn.hoidanit.laptopshop.domain.User;
+import vn.hoidanit.laptopshop.service.OrderService;
 import vn.hoidanit.laptopshop.service.ProductService;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -25,9 +26,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ItemController {
 
     private final ProductService productService;
+    private final OrderService orderService;
 
-    public ItemController(ProductService productService) {
+    public ItemController(ProductService productService, OrderService orderService) {
         this.productService = productService;
+        this.orderService = orderService;
+
     }
 
     @GetMapping("/product/{id}")
@@ -115,7 +119,7 @@ public class ItemController {
         long id = (long) session.getAttribute("id");
         currentUser.setId(id);
 
-        this.productService.handlePlaceOrder(currentUser, session, receiverName, receiverAddress, receiverPhone);
+        this.orderService.handlePlaceOrder(currentUser, session, receiverName, receiverAddress, receiverPhone);
 
         return "redirect:/thanks";
     }
