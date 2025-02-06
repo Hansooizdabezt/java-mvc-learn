@@ -113,4 +113,8 @@ public class OrderService {
         this.orderRepository.deleteById(id);
     }
 
+    public List<Order> fetchOrderByUser(User user) {
+        return this.orderRepository.findByUser(user);
+    }
+
 }
