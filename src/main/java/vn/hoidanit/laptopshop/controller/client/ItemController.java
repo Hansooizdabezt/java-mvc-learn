@@ -19,6 +19,8 @@ import vn.hoidanit.laptopshop.domain.Product;
 import vn.hoidanit.laptopshop.domain.User;
 import vn.hoidanit.laptopshop.service.OrderService;
 import vn.hoidanit.laptopshop.service.ProductService;
+import vn.hoidanit.laptopshop.service.specification.ProductSpecs;
+
 import org.springframework.web.bind.annotation.PostMapping;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,10 +33,12 @@ public class ItemController {
 
     private final ProductService productService;
     private final OrderService orderService;
+    private final ProductSpecs productSpecs;
 
-    public ItemController(ProductService productService, OrderService orderService) {
+    public ItemController(ProductService productService, OrderService orderService, ProductSpecs productSpecs) {
         this.productService = productService;
         this.orderService = orderService;
+        this.productSpecs = productSpecs;
 
     }
 
@@ -51,10 +55,11 @@ public class ItemController {
         } catch (Exception e) {
 
         }
-        String name = nameOptional.get();
 
-        Pageable pageable = PageRequest.of(page - 1, 8);
-        Page<Product> prs = this.productService.fetchProducts(pageable, name);
+        Pageable pageable = PageRequest.of(page - 1, 5);
+
+        String name = nameOptional.isPresent() ? nameOptional.get() : "";
+        Page<Product> prs = this.productService.fetchProductsWithSpec(pageable, name);
         List<Product> listProducts = prs.getContent();
         model.addAttribute("products", listProducts);
 
