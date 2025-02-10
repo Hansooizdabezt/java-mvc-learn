@@ -13,7 +13,7 @@
                     </button>
                     <div class="collapse navbar-collapse bg-white justify-content-between mx-5" id="navbarCollapse">
                         <div class="navbar-nav">
-                            <a href="/" class="nav-item nav-link active">Trang Chủ</a>
+                            <a href="/" class="nav-item nav-link">Trang Chủ</a>
                             <a href="/products" class="nav-item nav-link">Sản Phẩm</a>
 
                         </div>
@@ -70,3 +70,17 @@
             </div>
         </div>
         <!-- Navbar End -->
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const currentPath = window.location.pathname;
+
+                document.querySelectorAll(".nav-item").forEach(link => {
+                    if (link.getAttribute("href") === currentPath) {
+                        link.classList.add("active");
+                    } else {
+                        link.classList.remove("active"); // Đảm bảo chỉ có một active
+                    }
+                });
+            });
+        </script>
