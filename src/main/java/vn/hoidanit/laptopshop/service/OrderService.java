@@ -3,6 +3,8 @@ package vn.hoidanit.laptopshop.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import jakarta.servlet.http.HttpSession;
@@ -82,8 +84,8 @@ public class OrderService {
 
     }
 
-    public List<Order> fetchOrders() {
-        return this.orderRepository.findAll();
+    public Page<Order> fetchOrders(Pageable page) {
+        return this.orderRepository.findAll(page);
     }
 
     public Optional<Order> fetchOrderById(long id) {

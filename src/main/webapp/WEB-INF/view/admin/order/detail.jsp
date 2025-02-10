@@ -111,7 +111,7 @@
                                                         </p>
                                                     </div>
                                                 </div>
-                                                <a href="/admin/user" class="btn btn-success mt-3">Back</a>
+                                                <a href="/admin/order" class="btn btn-success mt-3">Back</a>
 
                                             </div>
 
